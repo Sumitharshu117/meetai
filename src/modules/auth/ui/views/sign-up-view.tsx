@@ -21,7 +21,7 @@ import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-// import { FaGithub, FaGoogle } from "react-icons/fa";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 import Image from "next/image";
 
 const formSchema = z
@@ -76,26 +76,26 @@ export const SignUpView = () => {
     );
   };
 
-  //   const onSocial = (provider: "github" | "google") => {
-  //     setError(null);
-  //     setPending(true);
+    const onSocial = (provider: "github" | "google") => {
+      setError(null);
+      setPending(true);
 
-  //     authClient.signIn.social(
-  //       {
-  //         provider: provider,
-  //         callbackURL: "/",
-  //       },
-  //       {
-  //         onSuccess: () => {
-  //           setPending(false);
-  //         },
-  //         onError: ({ error }) => {
-  //           setPending(false);
-  //           setError(error.message);
-  //         },
-  //       }
-  //     );
-  //   };
+      authClient.signIn.social(
+        {
+          provider: provider,
+          callbackURL: "/",
+        },
+        {
+          onSuccess: () => {
+            setPending(false);
+          },
+          onError: ({ error }) => {
+            setPending(false);
+            setError(error.message);
+          },
+        }
+      );
+    };
 
   return (
     <div className="flex flex-col gap-6">
@@ -206,9 +206,9 @@ export const SignUpView = () => {
                     className="w-full"
                     type="button"
                     disabled={pending}
-                    // onClick={() => onSocial("google")}
+                    onClick={() => onSocial("google")}
                   >
-                    {/* <FaGoogle /> */}
+                    <FaGoogle />
                     Google
                   </Button>
                   <Button
@@ -216,9 +216,9 @@ export const SignUpView = () => {
                     className="w-full"
                     type="button"
                     disabled={pending}
-                    // onClick={() => onSocial("github")}
+                    onClick={() => onSocial("github")}
                   >
-                    {/* <FaGithub /> */}
+                    <FaGithub />
                     github
                   </Button>
                 </div>
