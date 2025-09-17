@@ -15,7 +15,7 @@ export const HomeView = () => {
   return (
     <div className="flex flex-col p-4 gap-y-4">
       <p>Logged in as {session.user.name}</p>
-      <Button
+      <Button className="cursor-pointer"
         onClick={() =>
           authClient.signOut({
             fetchOptions: {

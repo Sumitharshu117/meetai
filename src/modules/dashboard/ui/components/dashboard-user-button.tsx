@@ -117,7 +117,7 @@ export const DashboardUserButton = () => {
           )}
           <div className="flex flex-col gap-0.5 text-left pl-1 overflow-hidden flex-1 min-w-0">
             <p className="text-sm truncate w-full">{data.user.name}</p>
-            <p className="text-xs text-muted-foreground truncate w-full">
+            <p className="text-xs text-black truncate w-full">
               {data.user.email}
             </p>
           </div>
