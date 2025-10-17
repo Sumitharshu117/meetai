@@ -21,6 +21,14 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 
+/**
+ * Renders a cmdk CommandPrimitive with project-standard styling and a `data-slot="command"`.
+ *
+ * Merges any provided `className` with the component's default styles and forwards all other props to the underlying CommandPrimitive.
+ *
+ * @param className - Additional CSS class names to append to the default styles
+ * @returns The styled CommandPrimitive element
+ */
 function Command({
   className,
   ...props
@@ -37,6 +45,19 @@ function Command({
   );
 }
 
+/**
+ * Renders a modal command palette using the shared Dialog layout and Command primitives.
+ *
+ * Renders a Dialog whose hidden header contains the provided title and description, and whose
+ * content wraps the Command component so callers can supply command input, groups, and items.
+ *
+ * @param title - Visible title for assistive technologies; defaults to "Command Palette"
+ * @param description - Visible description for assistive technologies; defaults to "Search for a command to run..."
+ * @param children - Command primitives (e.g., CommandInput, CommandList, CommandGroup, CommandItem) to render inside the palette
+ * @param className - Additional class names applied to the DialogContent wrapper
+ * @param showCloseButton - When true, shows the DialogContent close control; defaults to true
+ * @returns The composed Dialog element containing the command palette UI
+ */
 function CommandDialog({
   title = "Command Palette",
   description = "Search for a command to run...",
@@ -68,6 +89,16 @@ function CommandDialog({
   );
 }
 
+/**
+ * Render a responsive command palette that uses a Drawer on mobile devices and a Dialog on larger screens.
+ *
+ * @param title - Visible title exposed to assistive technologies and shown in the hidden header
+ * @param description - Visible description exposed to assistive technologies and shown in the hidden header
+ * @param children - Command primitives (input, list, groups, items) to render inside the palette
+ * @param className - Additional class names applied to the DialogContent (desktop only)
+ * @param showCloseButton - When rendering the Dialog (desktop), controls whether the close button is shown
+ * @returns The rendered command palette element (Drawer on mobile, Dialog on larger screens)
+ */
 function CommandResponsiveDialog({
   title = "Command Palette",
   description = "Search for a command to run...",
@@ -114,6 +145,12 @@ function CommandResponsiveDialog({
     </Dialog>
   );
 }
+/**
+ * Renders the command palette input field with an inline search icon and layout wrapper.
+ *
+ * @param className - Additional class names to merge into the input's default styles.
+ * @returns A JSX element containing the search icon and the styled command input wrapper.
+ */
 function CommandInput({
   className,
   ...props
@@ -136,6 +173,11 @@ function CommandInput({
   );
 }
 
+/**
+ * Renders a styled command list used by the command palette.
+ *
+ * @returns A `CommandPrimitive.List` React element with `data-slot="command-list"`, a maximum height, vertical scrolling, and merged `className` support.
+ */
 function CommandList({
   className,
   ...props
@@ -152,6 +194,11 @@ function CommandList({
   );
 }
 
+/**
+ * Renders the empty-state element for the command palette.
+ *
+ * @returns A `CommandPrimitive.Empty` element styled as the command palette's empty state.
+ */
 function CommandEmpty({
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Empty>) {
@@ -164,6 +211,11 @@ function CommandEmpty({
   );
 }
 
+/**
+ * Renders a styled wrapper around a cmdk Command.Group element.
+ *
+ * @returns A CommandPrimitive.Group element with standardized styling, a `data-slot="command-group"` attribute, and any provided props forwarded to the underlying component.
+ */
 function CommandGroup({
   className,
   ...props
@@ -180,6 +232,11 @@ function CommandGroup({
   );
 }
 
+/**
+ * Renders a styled separator used in the command UI.
+ *
+ * @returns A separator element for the command list
+ */
 function CommandSeparator({
   className,
   ...props
@@ -193,6 +250,16 @@ function CommandSeparator({
   );
 }
 
+/**
+ * Renders a styled command list item for the command palette.
+ *
+ * Applies the component's default styling, merges any provided `className`, sets
+ * the `data-slot` to `"command-item"`, and forwards all other props to the
+ * underlying `CommandPrimitive.Item`.
+ *
+ * @param className - Additional class names to merge with the component's default styles
+ * @returns A `CommandPrimitive.Item` element with consistent styling and `data-slot="command-item"`
+ */
 function CommandItem({
   className,
   ...props
@@ -209,6 +276,11 @@ function CommandItem({
   );
 }
 
+/**
+ * Renders a styled span intended to display keyboard shortcut text in command items.
+ *
+ * @returns The rendered span element used for displaying a command shortcut.
+ */
 function CommandShortcut({
   className,
   ...props
