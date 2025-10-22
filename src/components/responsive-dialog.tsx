@@ -1,4 +1,4 @@
-"use-client";
+"use client";
 import { useIsMobile } from "@/hooks/use-mobile";
 import {
   Dialog,
@@ -19,7 +19,7 @@ import {
 interface ResponsiveDialogProps {
   title: string;
   description: string;
-  childern: React.ReactNode;
+  children: React.ReactNode;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
@@ -27,7 +27,7 @@ interface ResponsiveDialogProps {
 export const ResponsiveDialog = ({
   title,
   description,
-  childern,
+  children,
   open,
   onOpenChange,
 }: ResponsiveDialogProps) => {
@@ -40,7 +40,7 @@ export const ResponsiveDialog = ({
             <DrawerTitle>{title}</DrawerTitle>
             <DrawerDescription>{description}</DrawerDescription>
           </DrawerHeader>
-          <div className="p-4">{childern}</div>
+          <div className="p-4">{children}</div>
         </DrawerContent>
       </Drawer>
     );
@@ -53,7 +53,7 @@ export const ResponsiveDialog = ({
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         {/* reason? why we don't use div here ?:drawer need padding while dailog not */}
-        {childern}
+        {children}
       </DialogContent>
     </Dialog>
   );
