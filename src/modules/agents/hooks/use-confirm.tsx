@@ -4,13 +4,9 @@ import { Button } from "@/components/ui/button";
 
 import { ResponsiveDialog } from "@/components/responsive-dialog";
 
-export const useConfirm = (
-  title: string,
-  description: string
-): [() => JSX.Element, () => Promise<unknown>] => {
-  const [promise, setPromise] = useState<{
-    resolve: (value: boolean) => void;
-  } | null>(null);
+export const useConfirm = ( title: string, description: string ): [() => JSX.Element, () => Promise<unknown>] => 
+  {
+  const [promise, setPromise] = useState<{ resolve: (value: boolean) => void; } | null>(null);
 
   const confirm = () => {
     return new Promise((resolve) => {
