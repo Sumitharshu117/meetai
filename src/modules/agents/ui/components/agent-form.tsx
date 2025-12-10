@@ -16,12 +16,12 @@ import { toast } from "sonner";
 interface AgentFormProps {
   onSuccess?: () => void;
   onCancel?: () => void;
-  intialValues?: AgentGetOne;
+  initialValues?: AgentGetOne;
 }
 export const AgentForm = ({
   onSuccess,
   onCancel,
-  intialValues,
+  initialValues,
 }: AgentFormProps) => {
   const trpc = useTRPC();
   const router = useRouter();
@@ -33,9 +33,29 @@ export const AgentForm = ({
         await queryClient.invalidateQueries(
             trpc.agents.getMany.queryOptions({}),
         );
-        if (intialValues?.id) {
+        if (initialValues?.id) {
             await queryClient.invalidateQueries(
-                trpc.agents.getOne.queryOptions({ id: intialValues.id }),
+                trpc.agents.getOne.queryOptions({ id: initialValues.id }),
+            );
+        }
+        onSuccess?.();
+      },
+      onError: (error) => {
+        toast.error(error.message)
+
+        // TODO: Check if error code is "FORBIDDEN" and redirect to "/upgrade"
+      },
+    })
+  );
+  const updateAgent = useMutation(
+    trpc.agents.update.mutationOptions({
+      onSuccess: async () => {
+        await queryClient.invalidateQueries(
+            trpc.agents.getMany.queryOptions({}),
+        );
+        if (initialValues?.id) {
+            await queryClient.invalidateQueries(
+                trpc.agents.getOne.queryOptions({ id: initialValues.id }),
             );
         }
         onSuccess?.();
@@ -50,15 +70,15 @@ export const AgentForm = ({
   const form = useForm<z.infer<typeof agentsInsertSchema>>({
     resolver: zodResolver(agentsInsertSchema),
     defaultValues: {
-      name: intialValues?.name ?? "",
-      instructions: intialValues?.name ?? "",
+      name: initialValues?.name ?? "",
+      instructions: initialValues?.name ?? "",
     },
   });
-  const isEdit = !!intialValues?.id;
-  const isPending = createAgent.isPending;
+  const isEdit = !!initialValues?.id;
+  const isPending = createAgent.isPending || updateAgent.isPending;
   const onSubmit = (values: z.infer<typeof agentsInsertSchema>) => {
     if (isEdit) {
-      console.log("todo: updateAgent");
+      updateAgent.mutate({ id:initialValues.id,...values});
     } else {
       createAgent.mutate(values);
     }
