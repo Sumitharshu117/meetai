@@ -41,17 +41,17 @@ export const DashboardSidebar = () => {
   const pathname = usePathname();
 
   return (
-    <Sidebar className="bg-green-800">
-      <SidebarHeader className="text-sidebar-accent-foreground bg-green-800">
+    <Sidebar >
+      <SidebarHeader className="text-sidebar-accent-foreground bg-orange-200 py-2.25" >
         <Link href="/" className="flex items-center gap-2 px-2 pt-2">
           <Image src="/logo.svg" height={36} width={36} alt="MeetAi" />
-          <p className="text-2xl font-semibold">Meet.AI</p>
+          <p className="text-2xl font-semibold">MeetAI</p>
         </Link>
       </SidebarHeader>
-      <div className="px-4 py-2 bg-green-800">
+      <div className="px-4 py-2 bg-orange-300">
         <Separator className="opacity-10 text-[#5D6B68] " />
       </div>
-      <SidebarContent className="bg-green-800">
+      <SidebarContent className="bg-orange-300">
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -78,11 +78,14 @@ export const DashboardSidebar = () => {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-        <div className="px-4 py-2 bg-green-800">
+        <div className="px-4 py-2 bg-orange-300">
           <Separator className="opacity-10 text-[#5D6B68]" />
         </div>
       </SidebarContent>
-      <SidebarFooter className="text-white bg-green-800">
+      <div className="px-4 py-2 bg-orange-200">
+          <Separator className="opacity-10 text-[#5D6B68]" />
+        </div>
+      <SidebarFooter className="text-white bg-stone-300">
             <DashboardUserButton />
       </SidebarFooter>
     </Sidebar>
